@@ -17,3 +17,4 @@ psycopg-binary==3.2.10
 langchain-openai==0.3.34
 RestrictedPython==8.1
 httpx==0.28.1
+langfuse==3.10.0

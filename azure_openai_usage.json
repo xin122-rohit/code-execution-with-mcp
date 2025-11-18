@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2025-11-18T10:29:31.391535",
+    "model": "gpt-4o-mini-2024-07-18",
+    "prompt_tokens": 35,
+    "completion_tokens": 1180,
+    "total_tokens": 1215,
+    "cost_usd": 0.000713
+  }
+]

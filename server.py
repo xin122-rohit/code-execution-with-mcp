@@ -1,19 +1,15 @@
-from typing import Any
-from dotenv import load_dotenv
-load_dotenv()
 import os
-from starlette.requests import Request
-from starlette.responses import JSONResponse
-import importlib
-import asyncio
 import json
-from starlette.responses import JSONResponse
-from starlette.requests import Request
+import asyncio
+import importlib
 import importlib.util
+from typing import Any
 from pathlib import Path
+from dotenv import load_dotenv
 from initialize_server import mcp
-# from mcp.server import Tool  # Added for tool metadata
-# from mcp.types import Tool  # Added for tool metadata
+from starlette.requests import Request
+from starlette.responses import JSONResponse
+load_dotenv()
 
 PLUGINS_DIR = Path(os.getenv("PLUGINS_DIR"))
 PLUGINS_DIR.mkdir(exist_ok=True)
@@ -73,7 +69,7 @@ async def collect_tools_for_search():
                 "name": t.name,
                 "description": t.description,
                 "parameters": t.inputSchema,
-                "titile":t.title,
+                "title":t.title,
             })
         
     print(ALL_TOOLS)

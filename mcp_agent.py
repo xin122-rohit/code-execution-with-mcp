@@ -2,6 +2,12 @@
 from azure_code_gen import generate_code
 from repl import MCPREPL
 import os
+from langfuse import observe, get_client
+ 
+langfuse = get_client()
+ 
+# Create a span without a context manager
+span = langfuse.start_span(name="user-request")
 
 class MCPCodeAgent:
     def __init__(self):
@@ -17,12 +23,20 @@ class MCPCodeAgent:
 
         # Step 2: Generate code with Azure
         context = "\n".join([f"History: {h}" for h in self.history[-2:]])  # Last 2 for context
+
+        # Your processing logic here
+        span.update(output="Request processed")
         code = generate_code(query, context)
         print(f"Generated Code:\n{code}")
 
         # Step 3: Execute in REPL
         output = self.repl.execute_code(code)
         print(f"Execution Output: {output}")
+        nested_span = span.start_span(name="nested-span")
+        nested_span.set_attribute("code", code)
+        nested_span.update(output="Nested span output")
+        nested_span.end()
+        langfuse.flush()
 
         # Step 4: Extract final answer (from prints/logs)
         final_answer = self.extract_answer(code, output)  # Custom logic or parse prints

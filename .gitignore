@@ -1,3 +1,5 @@
 .cemvenv
 .env
 __pycache__
+my_lsngfuse_traces_nov2025.csv
+main.py
